@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Главная страница</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/users/managment}">Управление пользователями</a></li>
+        <li><a th:href="@{/projects/managment}">Управление проектами</a></li>
+    </ul>
+</nav>
+
+<section>
+    <p>Выберите пункт меню для выполнения действия.</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 Козиков Андрей Викторович</p>
+</footer>
+</body>
+</html>

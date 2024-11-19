@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: WebService  # Название приложения, используется в логах и метаданных.
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG  # Уровень логирования для веб-компонентов Spring (в данном случае уровень DEBUG для детализированных логов).
+      hibernate:
+        SQL: DEBUG

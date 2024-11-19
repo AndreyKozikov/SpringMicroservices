@@ -1,0 +1,19 @@
+server:
+  port: 8765  # Порт API Gateway
+
+spring:
+  application:
+    name: api-gateway  # Имя вашего API Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: WebService
+          uri: "http://localhost:8081/"
+          predicates:
+            - Path=/webservice/**
+        - id: UserProjectService
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/**
+
+
