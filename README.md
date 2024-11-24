@@ -1,6 +1,24 @@
-Задание: Создайте простую микросервисную архитектуру с использованием Spring Cloud. Ваша архитектура должна включать хотя бы два микросервиса и службу распределения.
+## Урок 10. Spring Testing. JUnit и Mockito для написания тестов.
+
+```
+Задание: Напишите тесты для основной логики вашего приложения с использованием Spring Testing, JUnit и Mockito.
+```
+
+В процессе выполнения задания для микросервиса [UserProjectService](UserProjectService) были разработаны: 
+
+* класс [ProjectServiceUnitTest.java](UserProjectService%2Fsrc%2Ftest%2Fjava%2Forg%2Fexample%2Fservice%2FProjectServiceUnitTest.java), 
+содержащий юнит-тест `updateProjectByIdUnitTest` метода `updateProjectById` сервиса [ProjectService.java](UserProjectService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2Fservice%2FProjectService.java)
+
+* класс [ProjectServiceIntegrationTest.java](UserProjectService%2Fsrc%2Ftest%2Fjava%2Forg%2Fexample%2Fservice%2FProjectServiceIntegrationTest.java),
+соддержащий интеграционные тесты методов сервиса [ProjectService.java](UserProjectService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2Fservice%2FProjectService.java)
 
 ---
+
+## Урок 9. Spring Cloud. Микросервисная архитектура.
+
+```
+Задание: Создайте простую микросервисную архитектуру с использованием Spring Cloud. Ваша архитектура должна включать хотя бы два микросервиса и службу распределения.
+```
 
 Для выполнения задания была разработана простая микросервисная архитектура с использованием Spring Cloud, включающая несколько ключевых компонентов, которые обеспечивают эффективное взаимодействие между сервисами, а также управление их маршрутизацией и регистрацией.
 

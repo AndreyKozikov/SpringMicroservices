@@ -22,8 +22,8 @@ public class ProjectService {
      * Метод для добавления нового проекта
      * @param project проект для добавления
      */
-    public void addProject(Project project){
-        projectRepository.save(project);
+    public Project addProject(Project project){
+        return projectRepository.save(project);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ProjectService {
      */
     @Transactional
     public void updateProjectById(Long projectId, Project project){
-        Project projectUpdate = findProjectById(projectId);
+        Project projectUpdate = projectRepository.findById(projectId).orElse(null);
         projectUpdate.setName(project.getName());
         projectUpdate.setDescription(project.getDescription());
         projectUpdate.setCreatedDate(project.getCreatedDate());
