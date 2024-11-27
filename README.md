@@ -1,3 +1,88 @@
+## Урок 11. Spring Actuator. Настройка мониторинга с Prometheus и Grafana.
+
+Задание: Используйте Spring Actuator для отслеживания метрик вашего приложения. Настройте визуализацию этих метрик
+с использованием Prometheus и Grafana.
+
+Задание выполнено для микросервиса `UserProjectService`
+
+В [pom.xml](UserProjectService%2Fpom.xml) внедрены зависимости
+
+```
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+```
+
+В настройках [application.yml](UserProjectService%2Fsrc%2Fmain%2Fresources%2Fapplication.yml) определены настройки
+
+```angular2html
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+```
+
+Prometheus и Grafana развернуты в Docker
+
+Создан файл `docker-compose.yml`
+
+```angular2html
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    restart: always
+```
+
+Создан файл `prometheus.yml`
+
+```angular2html
+global:
+  
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+
+  - job_name: 'UserProjectService'
+    metrics_path: 'actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082']
+```
+
+В настройках Grafana прописываем путь к Prometheus в контейнере http://prometheus:9090
+
+В корне размещены 2 скриншота с работающими серверами Grafana, Prometheus, Eurica, одной из страниц разработанного приложения
+
+---
+
 ## Урок 10. Spring Testing. JUnit и Mockito для написания тестов.
 
 ```
