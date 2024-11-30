@@ -36,4 +36,9 @@ public class UserAdd {
 //    @NotBlank(message = "Роль не должна быть пустой")
 //    @Size(max = 50, message = "Роль не должна превышать 50 символов")
     private String role;
+
+    @Override
+    public String toString() {
+        return String.format("{'userName': '%s', 'email': '%s', 'role': '%s'}", userName, email, role);
+    }
 }

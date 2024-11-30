@@ -1,0 +1,6 @@
+2024-11-30T13:57:08.743381700 Добавлен пользователь {'userName': 'Test User', 'email': 'test@mail', 'role': 'ROLE_USER'}
+2024-11-30T13:59:27.604437300 Добавлен пользователь {'userName': 'test', 'email': 'test@test', 'role': 'ROLE_ADMIN'}
+2024-11-30T14:04:27.856062 Добавлен проект {'Project name': 'Проект тестовый', 'Description': 'Проект для логирования', 'Created Date': '2024-11-15'}
+2024-11-30T14:54:46.059626 Добавлен пользователь {'userName': 'test', 'email': 'test@test', 'role': 'ROLE_ADMIN'}
+2024-11-30T14:55:05.281782300 Добавлен пользователь {'userName': '123', 'email': 'test@test', 'role': 'ROLE_USER'}
+2024-11-30T15:28:02.369513500 Добавлен проект {'Project name': '123', 'Description': '123', 'Created Date': '2024-11-05'}

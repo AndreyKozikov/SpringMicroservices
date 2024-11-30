@@ -17,4 +17,10 @@ public class Project {
     private String description;
 
     private LocalDate createdDate;
+
+    @Override
+    public String toString() {
+        return
+        String.format("{'Project name': '%s', 'Description': '%s', 'Created Date': '%s'}", name, description, createdDate);
+    }
 }

@@ -5,11 +5,13 @@ import org.example.WebMicroService.model.Project;
 import org.example.WebMicroService.model.UserDTO;
 import lombok.AllArgsConstructor;
 import org.example.WebMicroService.model.UserProjectRequest;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.CompletableFuture;
+
 
 /**
  * Сервис для управления связи между пользователями и проектами.
@@ -22,6 +24,7 @@ public class UserProjectService {
     private final UserProjectClient userProjectClient;
     private final UserService userService;
     private final ProjectService projectService;
+    private ApplicationEventPublisher publisher;
 
     /**
      * Метод, возвращающий список пользователей, связанных с определенным проектом
@@ -86,24 +89,6 @@ public class UserProjectService {
         userProjectClient.removeUsersFromProject(request);
     }
 
-//    /**
-//     * Удаляет связь между пользователем и проектом по их идентификаторам.
-//     *
-//     * Этот метод выполняет валидацию проекта и, если проект валиден,
-//     * удаляет запись о связи между пользователем и проектом.
-//     *
-//     * @param projectId идентификатор проекта, который необходимо удалить.
-//     * @param userId идентификатор пользователя, для которого необходимо удалить связь с проектом.
-//     * @return {@code true}, если связь была успешно удалена, {@code false} в противном случае.
-//     */
-//    public boolean removeProject(Long projectId, Long userId) {
-//        if (!projectValidation(projectId)) {
-//            return false;
-//        }
-//        int a = 0;
-//        a += usersProjectRepository.removeUserAndProject(userId, projectId);
-//        return a>0;
-//    }
 
     /**
      * Метод проверяет, существует ли проект с заданным идентификатором.

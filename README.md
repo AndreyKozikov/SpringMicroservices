@@ -1,3 +1,40 @@
+## Урок 12. Паттерны проектирония и GoF паттерны в Spring приложении
+
+Задание:
+
+1) На базе первого примера разобранного на семинаре, добавить в один из проектов разработанных ранее spring Integration.
+Сохранять запросы от пользователя в файл.
+
+2) Добавить в проект один из паттернов разобранных на лекции.
+
+Задание выполнено для микросервиса WebMicroServices
+
+В файл [pom.xml](WebMicroService%2Fpom.xml) добавлены зависимости.
+
+Реализован класс конфигурации [IntegrationConfig.java](WebMicroService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2FWebMicroService%2Fconfig%2FIntegrationConfig.java)
+для настройки интеграции.
+
+Создан интерфейс [WriteInfoFile.java](WebMicroService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2FWebMicroService%2Fservice%2FWriteInfoFile.java)
+для управления записью данных в файл.
+
+В контролерах [ProjectController.java](WebMicroService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2FWebMicroService%2Fcontroller%2FProjectController.java)
+и [UserController.java](WebMicroService%2Fsrc%2Fmain%2Fjava%2Forg%2Fexample%2FWebMicroService%2Fcontroller%2FUserController.java)
+добавлены дополнены методы addProject и addUser, которые теперь записывают информацию о созданных проектах и пользователях в лог-файл.
+
+
+В настоящее время реализованы в проекте реализованы паттерны:
+
+MVC
+
+Microservices
+
+Message Bus
+
+Реализованный первый пункт задания можно считать паттерном Publish/Subscribe.
+
+---
+
+
 ## Урок 11. Spring Actuator. Настройка мониторинга с Prometheus и Grafana.
 
 Задание: Используйте Spring Actuator для отслеживания метрик вашего приложения. Настройте визуализацию этих метрик

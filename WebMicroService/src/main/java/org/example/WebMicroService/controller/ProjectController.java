@@ -3,6 +3,7 @@ package org.example.WebMicroService.controller;
 import org.example.WebMicroService.model.Project;
 import org.example.WebMicroService.service.ProjectService;
 import lombok.AllArgsConstructor;
+import org.example.WebMicroService.service.WriteInfoFile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping("/projects")
 public class ProjectController {
-
+    private final WriteInfoFile writeInfoFile;
     private final ProjectService projectService;
 
     /**
@@ -46,10 +47,12 @@ public class ProjectController {
     }
 
     /**
-     * Метод обрабатывает POST-запрос на добавление нового проекта в базу и
-     * осуществляет перенаправление на HTML страницу
-     * @param project объект проекта
-     * @return имя шаблона для отображения
+     * Метод обрабатывает POST-запрос на добавление нового проекта в базу данных.
+     * Если проект не проходит проверку, осуществляется перенаправление на страницу добавления проекта.
+     * В противном случае проект добавляется в базу, а информация о добавлении записывается в файл.
+     *
+     * @param project объект проекта, содержащий данные о новом проекте
+     * @return имя шаблона для отображения: либо "/projects/add_project" в случае ошибки, либо "/projects/project_managment" после успешного добавления
      */
     @PostMapping("/add")
     public String addProject(@ModelAttribute("project") Project project){
@@ -57,7 +60,7 @@ public class ProjectController {
             return "/projects/add_project";
         }
         projectService.addProject(project);
-
+        writeInfoFile.writeToFile("output.log", "Добавлен проект " + project.toString());
         return "/projects/project_managment";
     }
 

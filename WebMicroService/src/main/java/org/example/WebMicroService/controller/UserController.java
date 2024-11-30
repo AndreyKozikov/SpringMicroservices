@@ -4,11 +4,17 @@ import org.example.WebMicroService.model.UserAdd;
 import org.example.WebMicroService.model.UserDTO;
 import org.example.WebMicroService.service.UserService;
 import lombok.AllArgsConstructor;
+import org.example.WebMicroService.service.WriteInfoFile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.integration.file.FileHeaders;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +29,10 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping("/users")
 public class UserController {
+
     private final UserService userService;
+
+    private final WriteInfoFile writeInfoFile;
 
     /**
      * Метод обрабатывает GET-запрос на отображение страницы управления пользователями
@@ -48,15 +57,19 @@ public class UserController {
     }
 
     /**
-     * Метод обрабатывает POST-запрос на добавление нового пользователя в базу
+     * Обрабатывает POST-запрос для добавления нового пользователя в базу данных.
      *
-     * @param user  объект пользователя
-     * @param model модель для передачи данных в представление
-     * @return имя шаблона для отображения
+     * Этот метод принимает данные пользователя, добавляет их в базу с помощью сервиса `userService`,
+     * а затем записывает информацию о добавлении пользователя в лог-файл с помощью `writeInfoFile`.
+     *
+     * @param user объект пользователя, содержащий информацию о новом пользователе
+     * @param model объект модели для передачи данных в представление (в данном случае не используется)
+     * @return строка, указывающая имя шаблона для отображения, где отображается управление пользователями
      */
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") UserAdd user, Model model) {
         userService.addUser(user);
+        writeInfoFile.writeToFile("output.log", "Добавлен пользователь " + user.toString());
         return "/users/users_managment";
     }
 
